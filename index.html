@@ -30,27 +30,212 @@
           data-background-video-muted="true"
           data-markdown>
             <textarea data-template>
-              # My Title
-              ## Subtitle
+              # CKAN
+              ## A Data Portal
 
-              [Author Name](mailto:a.name@esciencecenter.nl)
+              [Ole Mussmann](mailto:o.mussmann@esciencecenter.nl)
             </textarea>
           </section>
 
-          <section> <!-- start of nested slides/column -->
-            <section data-state="standard">
-              <h2>html slides</h2>
-              <p>content</p>
-              <p>with html</p>
-            </section>
-
             <section data-state="standard" data-markdown>
               <textarea data-template>
-                # Header
+                ## CWHAT?
+                ### WordPress for data portals<!-- .element: class="fragment" data-fragment-index="1" -->
 
-                - list item
-                - another one
+                - Open-source data management system <!-- .element: class="fragment" data-fragment-index="1" -->
+                - National open data portals:<br>data.gov, data.gov.uk, EU Open Data Portal <!-- .element: class="fragment" data-fragment-index="2" -->
+                - Research:<br>PANGAEA (earth science), KNB (ecology), universities <!-- .element: class="fragment" data-fragment-index="2" -->
+                - Core abstractions:  organizations (ownership) → datasets (metadata container) → resources (actual files) <!-- .element: class="fragment" data-fragment-index="3" -->
+                - API-first — the UI is just a client on top of the same API you use to script against it <!-- .element: class="fragment" data-fragment-index="4" -->
+
+                Supports FAIR principles <!-- .element: class="fragment" data-fragment-index="5" -->
               </textarea>
+            </section>
+
+          <section> <!-- start of nested slides/column -->
+            <section data-state="standard" data-markdown>
+              <textarea data-template>
+                ## Data Management
+              </textarea>
+            </section>
+
+            <section data-state="standard">
+              <h3>Datasets &amp; Resources</h3>
+              <ul>
+                <li>A <strong>dataset</strong> is a container combining multiple <strong>resources</strong> (files) under one metadata record</li>
+                <li>Resources can be any format: CSV, GeoJSON, PDF, images, NetCDF, …</li>
+                <li>Example: a research dataset with raw data, a notebook, and a publication PDF — all in one place</li>
+                <li>Each resource has its own metadata: name, format, description</li>
+              </ul>
+            </section>
+
+            <section data-state="standard">
+              <h3>Uploading Data — API</h3>
+              <ul>
+                <li>Everything in the UI is also available as a REST/JSON API</li>
+                <li>Two-step process:<br><code>package_create</code> → <code>resource_create</code></li>
+                <li>Authenticate via API token in the <code>Authorization</code> header</li>
+                <li>Scriptable with any HTTP client — curl, Python requests, R, …</li>
+                <li>Enables automated ingestion pipelines and CI/CD workflows</li>
+              </ul>
+            </section>
+
+            <section data-state="standard">
+              <h3>Create Dataset</h3>
+              <pre><code class="bash">API_KEY=...</code></pre>
+              <pre><code class="bash">curl -X POST http://localhost:5000/api/3/action/package_create \
+  -H "Authorization: $API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "name": "demo-research-dataset",
+    "title": "Demo Research Dataset",
+    "notes": "A demo dataset with CSV and GeoJSON.",
+    "license_id": "cc-by",
+    "owner_org": "demo-organization",
+    "tags": [{"name": "demo"}, {"name": "research"}, {"name": "geospatial"}]
+  }'</code></pre>
+            </section>
+
+            <section data-state="standard">
+              <h3>Upload Resource</h3>
+              <pre><code class="bash">curl -X POST http://localhost:5000/api/3/action/resource_create \
+  -H "Authorization: $API_KEY" \
+  -F "package_id=demo-research-dataset" \
+  -F "name=Research Stations" \
+  -F "format=CSV" \
+  -F "upload=@stations.csv"</code></pre>
+            </section>
+
+            <section data-state="standard">
+              <h3>Uploading Data — GUI</h3>
+              <ul>
+                <li>Create a dataset via the web interface: fill in metadata, then attach resources</li>
+                <li>Resources can be uploaded as files or linked by URL</li>
+                <li>Drag-and-drop file upload supported</li>
+                <li>Suitable for one-off uploads and less technical users</li>
+              </ul>
+            </section>
+
+            <section data-state="standard">
+              <h3>Metadata</h3>
+              <ul>
+                <li>Default fields: title, description, tags, license, author, maintainer</li>
+                <li>Fully extensible via <strong>ckanext-scheming</strong> — define custom fields in YAML</li>
+                <li>Add domain-specific fields: DOI, related publication, data type, embargo date</li>
+                <li>Link datasets to related repositories, code, and papers</li>
+              </ul>
+            </section>
+          </section> <!-- end of nested slides/column -->
+
+
+          <!-- Data Previews chapter -->
+          <section> <!-- start of nested slides/column -->
+            <section data-state="standard">
+              <h2>Data Previews</h2>
+            </section>
+
+            <section data-state="standard">
+              <h3>Built-in Viewers</h3>
+              <ul>
+                <li><strong>CSV / tabular</strong> — sortable, filterable table (DataTables)</li>
+                <li><strong>GeoJSON</strong> — interactive map via ckanext-geoview</li>
+                <li><strong>Images</strong> — inline rendering</li>
+                <li><strong>PDF</strong> — in-browser viewer</li>
+                <li><strong>Plain text</strong> — syntax-highlighted display</li>
+              </ul>
+              <p class="fragment">Tricky to get working.</p>
+            </section>
+
+            <section data-state="standard">
+              <h3>Examples</h3>
+              <ul>
+                <li><a href="https://demo.datashades.com/dataset/cemetery-data/resource/d83bc1f2-8de1-4bfe-8bd7-f0c5a9d93220">demo.datashades.com</a></li>
+                <li><a href="https://dataportal.eu-interact.org/dataset/karte-des-hintereisferners-1979-1-10-000/resource/85651b11-a22d-4edc-ae4f-fa757e14c760">dataportal.eu-interact.org</a></li>
+                <li><a href="https://demo.depositar.io/en/dataset/sample-dataset-1/resource/39510d4a-8943-4e77-b15d-c3866226d6d0">demo.depositar.io</a></li>
+              </ul>
+              <br>
+              <br>
+              (N.B.: Check out different theming)
+            </section>
+          </section> <!-- end of nested slides/column -->
+
+          <!-- Auth & Access Control chapter -->
+          <section> <!-- start of nested slides/column -->
+            <section data-state="standard">
+              <h2>Auth &amp; Access Control</h2>
+            </section>
+
+            <section data-state="standard">
+              <h3>Organizations, Roles &amp; Permissions</h3>
+              <ul>
+                <li><strong>Organizations</strong> own datasets</li>
+                <li>Three roles: <strong>member</strong> (read), <strong>editor</strong> (edit), <strong>admin</strong> (manage members)</li>
+                <li>Datasets can be <strong>public</strong> or <strong>private</strong> (visible only to organization members)</li>
+                <li>Sysadmins manage the whole instance</li>
+                <li>API token-based authentication for all programmatic access</li>
+              </ul>
+            </section>
+          </section> <!-- end of nested slides/column -->
+
+          <!-- Federation chapter -->
+          <section> <!-- start of nested slides/column -->
+            <section data-state="standard">
+              <h2>Federation &amp; Harvesting</h2>
+            </section>
+
+            <section data-state="standard">
+              <h3>Harvesting with ckanext-harvest</h3>
+              <ul>
+                <li>Pull metadata from remote sources on a schedule</li>
+                <li>Supported protocols: <strong>CKAN API</strong>, <strong>OAI-PMH</strong>, <strong>DCAT</strong>, <strong>CSW</strong></li>
+                <li>Enables building aggregator portals on top of distributed repositories</li>
+                <li>Harvested datasets are searchable alongside local datasets</li>
+                <li>Real-world examples
+                  <ul>
+                    <li>National portals aggregating from regional instances</li>
+                    <li>Companies aggregating from public datasets</li>
+                  </ul></li>
+              </ul>
+            </section>
+          </section> <!-- end of nested slides/column -->
+
+          <!-- Theming chapter -->
+          <section> <!-- start of nested slides/column -->
+            <section data-state="standard">
+              <h2>Theming &amp; Customization</h2>
+            </section>
+
+            <section data-state="standard">
+              <h3>Extending CKAN</h3>
+              <ul>
+                <li>UI customizable via <strong>CSS overrides</strong> and <strong>Jinja2 template overrides</strong></li>
+                <li>No core code changes needed — extensions override templates selectively</li>
+                <li>Organizations and groups can have custom logos and descriptions</li>
+                <li>Plugin interface allows deep customization: custom dataset forms, auth logic, resource controllers</li>
+                <li>Large ecosystem of community extensions</li>
+              </ul>
+            </section>
+          </section> <!-- end of nested slides/column -->
+
+          <!-- Closing -->
+          <section>
+            <section data-state="standard">
+              <h2>Aim</h2>
+              <ul>
+                <li>CKAN wants to be a <strong>batteries-included</strong> data portal — API, previews, auth, federation out of the box</li>
+                <li>Designed to be extended — schemas, plugins, harvesters</li>
+                <li>Used in production at national open data portals and research institutions worldwide</li>
+                <li>Open source, active community, Docker-ready</li>
+              </ul>
+            </section>
+
+            <section data-state="standard">
+              <h2>Challenges</h2>
+              <ul>
+                <li>Production software vs small deployment</li>
+                <li>Docker works - for vanilla stuff</li>
+                <li>Fancy functionality is not designed for Docker</li>
+              </ul>
             </section>
           </section> <!-- end of nested slides/column -->
 
