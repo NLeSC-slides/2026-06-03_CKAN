@@ -37,7 +37,8 @@
             </textarea>
           </section>
 
-            <section data-state="standard 10" data-markdown>
+            <section data-state="logo yellow_flag black_overlay 7" data-markdown data-background-image="./files/qimono-question-mark-2492009.jpg">
+              <!-- https://pixabay.com/illustrations/question-mark-pile-questions-symbol-2492009/ -->
               <textarea data-template>
                 ## CWHAT?
                 ### WordPress for data portals<!-- .element: class="fragment" data-fragment-index="1" -->
@@ -53,13 +54,14 @@
             </section>
 
           <section> <!-- start of nested slides/column -->
-            <section data-state="standard 10" data-markdown>
+            <section data-state="logo yellow_flag blue_overlay 8" data-markdown data-background-image="./files/mohamed_hassan-data-3938447.jpg">
+              <!-- https://pixabay.com/illustrations/data-analysis-accountant-document-3938447/ -->
               <textarea data-template>
                 ## Data Management
               </textarea>
             </section>
 
-            <section data-state="standard 10">
+            <section data-state="logo yellow_flag blue_overlay 9" data-background-image="./files/mohamed_hassan-data-3938447.jpg">
               <h3>Datasets &amp; Resources</h3>
               <ul>
                 <li>A <strong>dataset</strong> is a container combining multiple <strong>resources</strong> (files) under one metadata record</li>
@@ -69,7 +71,7 @@
               </ul>
             </section>
 
-            <section data-state="standard 10">
+            <section data-state="logo yellow_flag blue_overlay 9" data-background-image="./files/mohamed_hassan-data-3938447.jpg">
               <h3>Uploading Data — API</h3>
               <ul>
                 <li>Everything in the UI is also available as a REST/JSON API</li>
@@ -80,7 +82,7 @@
               </ul>
             </section>
 
-            <section data-state="standard 10">
+            <section data-state="logo yellow_flag blue_overlay 9" data-background-image="./files/mohamed_hassan-data-3938447.jpg">
               <h3>Create Dataset</h3>
               <pre><code class="bash">API_KEY=...</code></pre>
               <pre><code class="bash">curl -X POST http://localhost:5000/api/3/action/package_create \
@@ -96,7 +98,7 @@
   }'</code></pre>
             </section>
 
-            <section data-state="standard 10">
+            <section data-state="logo yellow_flag blue_overlay 9" data-background-image="./files/mohamed_hassan-data-3938447.jpg">
               <h3>Upload Resource</h3>
               <pre><code class="bash">curl -X POST http://localhost:5000/api/3/action/resource_create \
   -H "Authorization: $API_KEY" \
@@ -106,7 +108,7 @@
   -F "upload=@stations.csv"</code></pre>
             </section>
 
-            <section data-state="standard 10">
+            <section data-state="logo yellow_flag blue_overlay 9" data-background-image="./files/mohamed_hassan-data-3938447.jpg">
               <h3>Uploading Data — GUI</h3>
               <ul>
                 <li>Create a dataset via the web interface: fill in metadata, then attach resources</li>
@@ -116,7 +118,7 @@
               </ul>
             </section>
 
-            <section data-state="standard 10">
+            <section data-state="logo yellow_flag blue_overlay 9" data-background-image="./files/mohamed_hassan-data-3938447.jpg">
               <h3>Metadata</h3>
               <ul>
                 <li>Default fields: title, description, tags, license, author, maintainer</li>
@@ -130,11 +132,11 @@
 
           <!-- Data Previews chapter -->
           <section> <!-- start of nested slides/column -->
-            <section data-state="standard 10">
+            <section data-state="standard 7" data-background-image="./files/graphicmama-team-detective-1424831.jpg">
               <h2>Data Previews</h2>
             </section>
 
-            <section data-state="standard 10">
+            <section data-state="standard 9" data-background-image="./files/graphicmama-team-detective-1424831.jpg">
               <h3>Built-in Viewers</h3>
               <ul>
                 <li><strong>CSV / tabular</strong> — sortable, filterable table (DataTables)</li>
@@ -146,7 +148,7 @@
               <p class="fragment">Tricky to get working.</p>
             </section>
 
-            <section data-state="standard 10">
+            <section data-state="standard 9" data-background-image="./files/graphicmama-team-detective-1424831.jpg">
               <h3>Examples</h3>
               <ul>
                 <li><a href="https://demo.datashades.com/dataset/cemetery-data/resource/d83bc1f2-8de1-4bfe-8bd7-f0c5a9d93220">demo.datashades.com</a></li>
@@ -161,11 +163,11 @@
 
           <!-- Auth & Access Control chapter -->
           <section> <!-- start of nested slides/column -->
-            <section data-state="standard 10">
+            <section data-state="purple_overlay logo yellow_flag 7" data-background-image="./files/commkt-tools-2836960.jpg">
               <h2>Auth &amp; Access Control</h2>
             </section>
 
-            <section data-state="standard 10">
+            <section data-state="purple_overlay logo yellow_flag 9" data-background-image="./files/commkt-tools-2836960.jpg">
               <h3>Organizations, Roles &amp; Permissions</h3>
               <ul>
                 <li><strong>Organizations</strong> own datasets</li>
@@ -179,11 +181,12 @@
 
           <!-- Federation chapter -->
           <section> <!-- start of nested slides/column -->
-            <section data-state="standard 10">
+            <section data-state="standard 7" data-background-image="./files/anaterate-corn-harvest-5596982_1280.jpg">
+              <!-- https://pixabay.com/photos/corn-harvest-combine-harvester-5596982/ -->
               <h2>Federation &amp; Harvesting</h2>
             </section>
 
-            <section data-state="standard 10">
+            <section data-state="standard 9" data-background-image="./files/anaterate-corn-harvest-5596982_1280.jpg">
               <h3>Harvesting with ckanext-harvest</h3>
               <ul>
                 <li>Pull metadata from remote sources on a schedule</li>
@@ -201,11 +204,11 @@
 
           <!-- Theming chapter -->
           <section> <!-- start of nested slides/column -->
-            <section data-state="standard 10">
+            <section data-state="black_overlay yellow_flag logo 6" data-background-image="./files/5598375-carnival-3075912_1280.jpg">
               <h2>Theming &amp; Customization</h2>
             </section>
 
-            <section data-state="standard 10">
+            <section data-state="black_overlay yellow_flag logo 9" data-background-image="./files/5598375-carnival-3075912_1280.jpg">
               <h3>Extending CKAN</h3>
               <ul>
                 <li>UI customizable via <strong>CSS overrides</strong> and <strong>Jinja2 template overrides</strong></li>
@@ -219,7 +222,7 @@
 
           <!-- Closing -->
           <section>
-            <section data-state="standard 10">
+            <section data-state="blue_overlay logo yellow_flag 7" data-background-image="./files/kamyq-sky-2048854_1280.jpg">
               <h2>Aim</h2>
               <ul>
                 <li>CKAN wants to be a <strong>batteries-included</strong> data portal — API, previews, auth, federation out of the box</li>
@@ -229,7 +232,7 @@
               </ul>
             </section>
 
-            <section data-state="standard 10">
+            <section data-state="blue_overlay logo yellow_flag 7" data-background-image="./files/kamyq-sky-2048854_1280.jpg">
               <h2>Challenges</h2>
               <ul>
                 <li>Production software vs small deployment</li>
